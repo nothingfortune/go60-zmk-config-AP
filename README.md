@@ -35,3 +35,82 @@ To locate your firmware files and reflash your Go60...
 6. Flash the firmware to Go60 according to the user documentation on the official Go60 Support website (linked above)
 
 Your keyboard is now ready to use.
+
+## Keyboard Layout Reference Materials
+
+This section provides background on keyboard layouts, ergonomic concepts, and resources that informed this configuration.
+
+### TailorKey
+**Website:** https://sites.google.com/view/tailorkey/tailorkey
+
+TailorKey is a keymap project by Moosy Research focused on "supercharging your typing experience while keeping familiarity intact." It provides pre-built configurations for both Go60 and Glove80 keyboards with ergonomic optimizations.
+
+*"Don't just adapt to a layout. Let the layout adapt to you—make it truly yours."* — Moosy
+
+### Moosy Research - Learn
+**Website:** https://sites.google.com/view/keyboards/learn
+
+Key insights on mastering keyboard layouts:
+
+**Training Tips:**
+- Practice 30 minutes daily; even short sessions help
+- Practice before sleep—your brain consolidates learning overnight
+- Focus on accuracy first, speed comes later
+- Use tools like [keybr.com](https://keybr.com) and [monkeytype.com](https://monkeytype.com) for training
+
+**Alternative Layouts:**
+- QWERTY is objectively inefficient, but the fastest typists still use it
+- Switching layouts is about comfort and long-term ease, not speed
+- Your brain builds separate muscle memories for different keyboard types—you can keep QWERTY on laptop while learning a new layout on Go60
+
+**Symbols are the Problem:**
+- Programmers strain their right pinky/ring finger on symbol keys
+- Two approaches: (1) Use a dedicated symbol layer with symbols on home row, or (2) Remap number row shifted symbols using ZMK mod-morph
+
+### Glorious Engrammer by Sunaku
+**Repository:** https://github.com/sunaku/glove80-keymaps
+**Interactive Layer Map:** https://sunaku.github.io/moergo-glove80-keyboard.html#layers
+
+A comprehensive Glove80/MoErgo keymap featuring Miryoku-style layers and home row mods. Key concepts applicable to this config:
+
+**Home Row Mods (GACS order):**
+- G = GUI (Win/Cmd/Super)
+- A = ALT (Alt/Option)
+- C = CTL (Control)
+- S = SFT (Shift)
+- For macOS, automatically rearranges to "CAGS" since Cmd is used like Ctrl
+
+**Difficulty Levels for Learning:**
+```
+#define DIFFICULTY_LEVEL 1 // novice (500ms)
+#define DIFFICULTY_LEVEL 2 // slower (400ms)
+#define DIFFICULTY_LEVEL 3 // normal (300ms)
+#define DIFFICULTY_LEVEL 4 // faster (200ms)
+#define DIFFICULTY_LEVEL 5 // expert (100ms)
+```
+
+**Key Features:**
+- Factory layer escape route (Magic + T3) for easy return to default
+- Six specialized layers: Cursor, Number, Function, Symbol, Mouse, System
+- Bilateral combinations enforcement for proper touch-typing technique
+- Shift forgiveness using `hold-while-undecided` feature
+- One-shot sticky shifts on pinky keys for single letter capitalization
+- Unicode/Emoji support through ZMK macros
+
+**Key Auto-Repeat:**
+- Dual-function keys don't auto-repeat when held
+- Use "Tap then hold" method OR use typing layer access keys
+
+### Additional Resources
+
+**Typing Practice:**
+- [keybr.com](https://keybr.com) - Adaptive typing trainer (enable split matrix mode)
+- [monkeytype.com](https://monkeytype.com) - Speed testing with split keyboard mode
+- [ngram-type](https://ranelpadon.github.io/ngram-type/) - Practice common letter patterns
+- [speedtyper.dev](https://speedtyper.dev) - Code-focused typing practice
+
+**Layout Analyzers:**
+- [Alpha Test Drive Tool](https://sites.google.com/view/keyboards/tools/alphatestdrive_glove80) - Test alternative layouts without changing config
+
+**Key Philosophy:**
+*"Touch typing is like learning to ride a bike—don't look down; keep your eyes forward, trust your movement, and go with the rhythm."* — Moosy
