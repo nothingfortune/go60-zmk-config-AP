@@ -145,9 +145,9 @@
 #define LAYER_Typing 1
 #define LAYER_Autoshift 2
 #define LAYER_Nav 3
-#define LAYER_Symbol 4
+#define LAYER_Symb 4
 #define LAYER_Gaming 5
-#define LAYER_Numpad 6
+#define LAYER_Num 6
 #define LAYER_Cursor 7
 #define LAYER_MouseSlow 8
 #define LAYER_MouseFast 9
@@ -184,7 +184,7 @@
 /* ========================================================================== */
 
     input_processors {
-        zip_click_to_right_click_mapper: zip_click_to_right_click_mapper {
+        zip_click_to_rh_click_mapper: zip_click_to_rh_click_mapper {
             compatible = "zmk,input-processor-code-mapper";
             #input-processor-cells = <0>;
             type = <INPUT_EV_KEY>;
@@ -215,14 +215,7 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&mo LAYER_Numpad>, <&to LAYER_Numpad>;
-        };
-
-        symbol_td: symbol_td {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&mo LAYER_Symbol>, <&to LAYER_Symbol>;
+            bindings = <&mo LAYER_Num>, <&to LAYER_Num>;
         };
 
         /* ------------------------------------------------------------------ */
@@ -255,6 +248,20 @@
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&bt_select_3>, <&bt BT_DISC 3>;
+        };
+
+        /* ------------------------------------------------------------------ */
+        /*                        Number Hold-Tap                             */
+        /* ------------------------------------------------------------------ */
+
+        /* Tap = number, Hold = shifted symbol (e.g. 1/!, 2/@, 3/#) */
+        num_ht: num_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-unless-interrupted";
+            tapping-term-ms = <170>;
+            quick-tap-ms = <150>;
+            bindings = <&kp>, <&kp>;
         };
 
         /* ------------------------------------------------------------------ */
@@ -306,7 +313,7 @@
 
                 // Layer tap dance behaviors
 
-        ZMK_TD_LAYER(td_LAYER_Numpad, 6)
+        ZMK_TD_LAYER(td_LAYER_Num, 6)
 
         // AutoShift Helper - &AS main macro is chained to &AS_HT hold tap and &AS_Shifted macro. For faster typists, it is recommended to decrease the tapping-term-ms value. A suggested value is 135 ms.
         // More: https://github.com/nickcoutsos/keymap-editor/wiki/Autoshift-using-ZMK-behaviors
@@ -314,13 +321,13 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <190>;
-            bindings = <&AS_Shifted_v1_TKZ>, <&kp>;
+            bindings = <&AS_Shifted_TKZ>, <&kp>;
             flavor = "tap-preferred";
         };
 
         // Homerow Mod for the left index finger - TailorKey.
         // For advanced tuning of HRM values, see: https://docs.google.com/spreadsheets/d/1ESgObQelyz4lnKlfwLYsmofLJulOMK5RdGBsopLe2o8
-        HRM_left_index_v1_TKZ: HRM_left_index_v1_TKZ {
+        HRM_lh_index_TKZ: HRM_lh_index_TKZ {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <190>;
@@ -333,7 +340,7 @@
         };
 
         // Homerow Mod for the left middle finger - TailorKey
-        HRM_left_middy_v1_TKZ: HRM_left_middy_v1_TKZ {
+        HRM_lh_middy_TKZ: HRM_lh_middy_TKZ {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <210>;
@@ -346,7 +353,7 @@
         };
 
         // Homerow Mod for the left pinky - TailorKey
-        HRM_left_pinky_v1_TKZ: HRM_left_pinky_v1_TKZ {
+        HRM_lh_pinky_TKZ: HRM_lh_pinky_TKZ {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <225>;
@@ -359,7 +366,7 @@
         };
 
         // Homerow Mod for the left ring finger 1 - TailorKey
-        HRM_left_ring_v1_TKZ: HRM_left_ring_v1_TKZ {
+        HRM_lh_ring_TKZ: HRM_lh_ring_TKZ {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <240>;
@@ -372,7 +379,7 @@
         };
 
         // Homerow Mod for the right index finger - TailorKey
-        HRM_right_index_v1_TKZ: HRM_right_index_v1_TKZ {
+        HRM_rh_index_TKZ: HRM_rh_index_TKZ {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <190>;
@@ -385,7 +392,7 @@
         };
 
         // Homerow Mod for the right middle finger - TailorKey
-        HRM_right_middy_v1_TKZ: HRM_right_middy_v1_TKZ {
+        HRM_rh_middy_TKZ: HRM_rh_middy_TKZ {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <210>;
@@ -398,7 +405,7 @@
         };
 
         // Homerow Mod for the right pinky - TailorKey
-        HRM_right_pinky_v1_TKZ: HRM_right_pinky_v1_TKZ {
+        HRM_rh_pinky_TKZ: HRM_rh_pinky_TKZ {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <225>;
@@ -411,7 +418,7 @@
         };
 
         // Homerow Mod for the right ring 1 - TailorKey
-        HRM_right_ring_v1_TKZ: HRM_right_ring_v1_TKZ {
+        HRM_rh_ring_TKZ: HRM_rh_ring_TKZ {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <240>;
@@ -434,7 +441,7 @@
         };
 
         // thumb_layer_access - TailorKey
-        thumb_v2_TKZ: thumb_v2_TKZ {
+        lt_v2_TK: lt_v2_TK {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
@@ -477,6 +484,16 @@
             quick-tap-ms = <200>;
             require-prior-idle-ms = <150>;
             bindings = <&kp>, <&kp>;
+        };
+
+        /* Tab with Hyper key on hold */
+        tab_hyper: tab_hyper {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <0>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            bindings = <&hyper_key>, <&kp TAB>;
         };
     };
 
@@ -576,8 +593,8 @@
         };
 
         // AutoShift Helper- &AS main macro is chained to &AS_HT hold tap and &AS_Shifted macro - TailorKey
-        AS_Shifted_v1_TKZ: AS_Shifted_v1_TKZ {
-            label = "&AS_SHIFTED_V1_TKZ";
+        AS_Shifted_TKZ: AS_Shifted_TKZ {
+            label = "&AS_SHIFTED_TKZ";
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
             tap-ms = <0>;
@@ -592,8 +609,8 @@
         };
 
         // AutoShift (Assign &AS to a Key) - &AS main macro is chained to &AS_HT hold tap and &AS_Shifted macro - TailorKey
-        AS_v1_TKZ: AS_v1_TKZ {
-            label = "&AS_V1_TKZ";
+        AS_TKZ: AS_TKZ {
+            label = "&AS_TKZ";
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
             tap-ms = <0>;
@@ -610,8 +627,8 @@
         };
 
         // Cursor Layer - Extent Line (seq) - TailorKey
-        cur_EXTEND_LINE_macos_v1_TKZ: cur_EXTEND_LINE_macos_v1_TKZ {
-            label = "&CUR_EXTEND_LINE_MACOS_V1_TKZ";
+        cur_EXTEND_LINE_macos_TKZ: cur_EXTEND_LINE_macos_TKZ {
+            label = "&CUR_EXTEND_LINE_MACOS_TKZ";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             tap-ms = <1>;
@@ -620,8 +637,8 @@
         };
 
         // Cursor Layer - Extend Word (seq) - TailorKey
-        cur_EXTEND_WORD_macos_v1_TKZ: cur_EXTEND_WORD_macos_v1_TKZ {
-            label = "&CUR_EXTEND_WORD_MACOS_V1_TKZ";
+        cur_EXTEND_WORD_macos_TKZ: cur_EXTEND_WORD_macos_TKZ {
+            label = "&CUR_EXTEND_WORD_MACOS_TKZ";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             tap-ms = <1>;
@@ -630,8 +647,8 @@
         };
 
         // Cursor Layer macos - Select Line (seq) - TailorKey
-        cur_SELECT_LINE_macos_v1_TKZ: cur_SELECT_LINE_macos_v1_TKZ {
-            label = "&CUR_SELECT_LINE_MACOS_V1_TKZ";
+        cur_SELECT_LINE_macos_TKZ: cur_SELECT_LINE_macos_TKZ {
+            label = "&CUR_SELECT_LINE_MACOS_TKZ";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             tap-ms = <1>;
@@ -641,8 +658,8 @@
         };
 
         // Cursor Layer - Select None (seq) - TailorKey
-        cur_SELECT_NONE_macos_v1_TKZ: cur_SELECT_NONE_macos_v1_TKZ {
-            label = "&CUR_SELECT_NONE_MACOS_V1_TKZ";
+        cur_SELECT_NONE_macos_TKZ: cur_SELECT_NONE_macos_TKZ {
+            label = "&CUR_SELECT_NONE_MACOS_TKZ";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             tap-ms = <1>;
@@ -654,8 +671,8 @@
         };
 
         // Cursor Layer - Select None (seq) - TailorKey
-        cur_SELECT_NONE_v1_TKZ: cur_SELECT_NONE_v1_TKZ {
-            label = "&CUR_SELECT_NONE_V1_TKZ";
+        cur_SELECT_NONE_TKZ: cur_SELECT_NONE_TKZ {
+            label = "&CUR_SELECT_NONE_TKZ";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             tap-ms = <1>;
@@ -667,8 +684,8 @@
         };
 
         // Cursor Layer - Select Word (seq) - TailorKey
-        cur_SELECT_WORD_macos_v1_TKZ: cur_SELECT_WORD_macos_v1_TKZ {
-            label = "&CUR_SELECT_WORD_MACOS_V1_TKZ";
+        cur_SELECT_WORD_macos_TKZ: cur_SELECT_WORD_macos_TKZ {
+            label = "&CUR_SELECT_WORD_MACOS_TKZ";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             tap-ms = <1>;
@@ -718,8 +735,8 @@
         };
 
         // Symbol layer dot dot
-        symb_dotdot_v1_TKZ: symb_dotdot_v1_TKZ {
-            label = "&SYMB_DOTDOT_V1_TKZ";
+        symb_dotdot_TKZ: symb_dotdot_TKZ {
+            label = "&SYMB_DOTDOT_TKZ";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             tap-ms = <0>;
@@ -743,98 +760,98 @@
         compatible = "zmk,combos";
 
         // toggle gaming layer - TailorKey
-        combo_gaming_layer_v1_TKZ {
+        combo_gaming_layer_TKZ {
             timeout-ms = <50>;
             key-positions = <POS_LH_C1R4 POS_LH_C2R5>;
             bindings = <&tog LAYER_Gaming>;
         };
 
         // F1 combo for Go60 - TailorKey
-        combo_F1_cb_v1_TKZ {
+        combo_F1_cb_TKZ {
             key-positions = <POS_LH_C5R1 POS_LH_C5R2>;
             bindings = <&kp F1>;
             layers = <LAYER_Base LAYER_Typing LAYER_Autoshift>;
         };
 
         // F10 combo for Go60 - TailorKey
-        combo_F10_cb_v1_TKZ {
+        combo_F10_cb_TKZ {
             key-positions = <POS_RH_C5R1 POS_RH_C5R2>;
             bindings = <&kp F10>;
             layers = <LAYER_Base LAYER_Typing LAYER_Autoshift>;
         };
 
         // F11 combo for Go60 - TailorKey
-        combo_F11_cb_v1_TKZ {
+        combo_F11_cb_TKZ {
             key-positions = <POS_RH_C6R1 POS_RH_C6R2>;
             bindings = <&kp F11>;
             layers = <LAYER_Base LAYER_Typing LAYER_Autoshift>;
         };
 
         // F12 combo for Go60 - TailorKey
-        combo_F12_cb_v1_TKZ {
+        combo_F12_cb_TKZ {
             key-positions = <POS_RH_C5R1 POS_RH_C6R1>;
             bindings = <&kp F12>;
             layers = <LAYER_Base LAYER_Typing LAYER_Autoshift>;
         };
 
         // F2 combo for Go60 - TailorKey
-        combo_F2_cb_v1_TKZ {
+        combo_F2_cb_TKZ {
             key-positions = <POS_LH_C4R2 POS_LH_C4R1>;
             bindings = <&kp F2>;
             layers = <LAYER_Base LAYER_Typing LAYER_Autoshift>;
         };
 
         // F3 combo for Go60 - TailorKey
-        combo_F3_cb_v1_TKZ {
+        combo_F3_cb_TKZ {
             key-positions = <POS_LH_C3R2 POS_LH_C3R1>;
             bindings = <&kp F3>;
             layers = <LAYER_Base LAYER_Typing LAYER_Autoshift>;
         };
 
         // F4 combo for Go60 - TailorKey
-        combo_F4_cb_v1_TKZ {
+        combo_F4_cb_TKZ {
             key-positions = <POS_LH_C2R2 POS_LH_C2R1>;
             bindings = <&kp F4>;
             layers = <LAYER_Base LAYER_Typing LAYER_Autoshift>;
         };
 
         // F5 combo for Go60 - TailorKey
-        combo_F5_cb_v1_TKZ {
+        combo_F5_cb_TKZ {
             key-positions = <POS_LH_C1R2 POS_LH_C1R1>;
             bindings = <&kp F5>;
             layers = <LAYER_Base LAYER_Typing LAYER_Autoshift>;
         };
 
         // F6 combo for Go60 - TailorKey
-        combo_F6_cb_v1_TKZ {
+        combo_F6_cb_TKZ {
             key-positions = <POS_RH_C1R1 POS_RH_C1R2>;
             bindings = <&kp F6>;
             layers = <LAYER_Base LAYER_Typing LAYER_Autoshift>;
         };
 
         // F7 combo for Go60 - TailorKey
-        combo_F7_cb_v1_TKZ {
+        combo_F7_cb_TKZ {
             key-positions = <POS_RH_C2R1 POS_RH_C2R2>;
             bindings = <&kp F7>;
             layers = <LAYER_Base LAYER_Typing LAYER_Autoshift>;
         };
 
         // F8 combo for Go60 - TailorKey
-        combo_F8_cb_v1_TKZ {
+        combo_F8_cb_TKZ {
             key-positions = <POS_RH_C3R1 POS_RH_C3R2>;
             bindings = <&kp F8>;
             layers = <LAYER_Base LAYER_Typing LAYER_Autoshift>;
         };
 
         // F9 combo for Go60 - TailorKey
-        combo_F9_cb_v1_TKZ {
+        combo_F9_cb_TKZ {
             key-positions = <POS_RH_C4R1 POS_RH_C4R2>;
             bindings = <&kp F9>;
             layers = <LAYER_Base LAYER_Typing LAYER_Autoshift>;
         };
 
         // sticky "hyper" modifiers (Win + Alt + Ctrl + Shift) - Use with Tab - TailorKey
-        combo_sticky_hyp_rght_v1_TKZ {
+        combo_sticky_hyp_rght_TKZ {
             timeout-ms = <50>;
             key-positions = <POS_RH_C2R5 POS_RH_C2R4>;
             bindings = <&sk LG(LA(LC(LSHFT)))>;
@@ -842,7 +859,7 @@
         };
 
         // sticky "meh" modifiers (Alt + Ctrl + Shift) - Use with Tab - TailorKey
-        combo_sticky_meh_rght_v1_TKZ {
+        combo_sticky_meh_rght_TKZ {
             timeout-ms = <50>;
             key-positions = <POS_RH_C3R5 POS_RH_C3R4>;
             bindings = <&sk LA(LC(LSHFT))>;
@@ -850,7 +867,7 @@
         };
 
         // capslock when pressing both T1's - TailorKey
-        combo_capslock_v1_TKZ {
+        combo_capslock_TKZ {
             timeout-ms = <50>;
             key-positions = <POS_LH_T1 POS_RH_T1>;
             bindings = <&kp CAPS>;
@@ -858,14 +875,14 @@
         };
 
         // Alt Tab Switcher (Cursor Layer) - TailorKey
-        combo_tabswitch_ctrl_v1_TKZ {
+        combo_tabswitch_ctrl_TKZ {
             key-positions = <POS_LH_C2R4 POS_LH_C2R5>;
             bindings = <&mod_tab_chord_v2_TKZ LCTRL LAYER_Cursor>;
             layers = <LAYER_Base LAYER_Autoshift LAYER_Typing>;
         };
 
         // Alt Tab Switcher (Cursor Layer) - TailorKey
-        combo_tabswitch_gui_v1_TKZ {
+        combo_tabswitch_gui_TKZ {
             key-positions = <POS_LH_T1 POS_LH_C1R4>;
             bindings = <&mod_tab_chord_v2_TKZ LGUI LAYER_Cursor>;
             layers = <LAYER_Base LAYER_Autoshift LAYER_Typing>;
@@ -919,39 +936,39 @@
 /* ========================================================================== */
 
 &cirque_rh_listener {
-    input-processors = <&zip_temp_layer 7 2000>;
+    input-processors = <&zip_xy_scaler 3 1>, <&zip_temp_layer 7 1000>;
     layer_8 {
         layers = <LAYER_MouseSlow>;
-        input-processors = <&zip_xy_scaler 1 1>, <&zip_temp_layer 7 2000>;
+        input-processors = <&zip_xy_scaler 1 1>, <&zip_temp_layer 7 1000>;
     };
     layer_10 {
         layers = <LAYER_MouseWarp>;
-        input-processors = <&zip_xy_scaler 6 1>, <&zip_temp_layer 7 2000>;
+        input-processors = <&zip_xy_scaler 6 1>, <&zip_temp_layer 7 1000>;
     };
     layer_9 {
         layers = <LAYER_MouseFast>;
-        input-processors = <&zip_xy_scaler 4 1>, <&zip_temp_layer 7 2000>;
+        input-processors = <&zip_xy_scaler 4 1>, <&zip_temp_layer 7 1000>;
     };
 };
 
 &cirque_lh_listener {
-    input-processors = <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 2000>, <&zip_scroll_scaler 1 8>;
+    input-processors = <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 1000>, <&zip_scroll_scaler 1 8>;
     layer_8 {
         layers = <LAYER_MouseSlow>;
-        input-processors = <&zip_xy_scaler 5 14>, <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 2000>, <&zip_scroll_scaler 1 8>;
+        input-processors = <&zip_xy_scaler 5 14>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 1000>, <&zip_scroll_scaler 1 8>;
     };
     layer_10 {
         layers = <LAYER_MouseWarp>;
-        input-processors = <&zip_xy_scaler 13 3>, <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 2000>, <&zip_scroll_scaler 1 8>;
+        input-processors = <&zip_xy_scaler 13 3>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 1000>, <&zip_scroll_scaler 1 8>;
     };
     layer_9 {
         layers = <LAYER_MouseFast>;
-        input-processors = <&zip_xy_scaler 3 2>, <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 2000>, <&zip_scroll_scaler 1 8>;
+        input-processors = <&zip_xy_scaler 3 2>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 1000>, <&zip_scroll_scaler 1 8>;
     };
 };
 
 /* ========================================================================== */
-/*                                 KEYMAPS                                     */
+/*                                 KEYMAPS                                    */
 /* ========================================================================== */
 
 / {
@@ -964,24 +981,24 @@
         layer_Base {
             bindings = <
 /* ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
-/* │          ESC/`             │ │            1               │ │            2               │ │            3               │ │            4               │ │            5               │                                                                                     │            6               │ │            7               │ │            8               │ │          9/()              │ │            0               │ │           {}               │ */
-             &gresc                          &kp N1                         &kp N2                         &kp N3                         &kp N4                         &kp N5                                                                                                            &kp N6                         &kp N7                         &kp N8                         &n9_paren                      &kp N0                       &pair_brace
+/* │          ESC/`             │ │          1/!               │ │          2/@               │ │          3/#               │ │          4/$               │ │          5/%               │                                                                                     │          6/^               │ │          7/&               │ │          8/*               │ │           9/()             │ │            0/)             │ │           {}               │ */
+             &gresc                    &num_ht LS(N1) N1              &num_ht LS(N2) N2              &num_ht LS(N3) N3              &num_ht LS(N4) N4              &num_ht LS(N5) N5                                                                                                   &num_ht LS(N6) N6              &num_ht LS(N7) N7              &num_ht LS(N8) N8                 &n9_paren                  &num_ht LS(N0) N0                 &pair_brace
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
 /* │           TAB              │ │            Q               │ │            W               │ │            E               │ │            R               │ │            T               │                                                                                     │            Y               │ │            U               │ │            I               │ │            O               │ │            P               │ │           ()               │ */
-             &kp TAB                         &kp Q                          &kp W                          &kp E                          &kp R                          &kp T                                                                                                             &kp Y                          &kp U                           &kp I                          &kp O                          &kp P                       &pair_paren
+             &tab_hyper                      &kp Q                          &kp W                          &kp E                          &kp R                          &kp T                                                                                                              &kp Y                          &kp U                          &kp I                          &kp O                          &kp P                       &pair_paren
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
-/* │      RET(hold)/TAB         │ │       GUI(hold)/A          │ │       ALT(hold)/S          │ │      CTRL(hold)/D          │ │     SHIFT(hold)/F          │ │       SYMB(hold)/G         │                                                                                     │       SYMB(hold)/H         │ │     SHIFT(hold)/J          │ │      CTRL(hold)/K          │ │       ALT(hold)/L          │ │       GUI(hold)/;          │ │           ""               │ */
-   &HRM_left_pinky_v1_TKZ CAPS LSHFT &HRM_left_pinky_v1_TKZ LGUI A  &HRM_left_ring_v1_TKZ LALT S  &HRM_left_middy_v1_TKZ LCTRL D &HRM_left_index_v1_TKZ LSHFT F       &lt LAYER_Symbol G                                                                                                 &lt LAYER_Symbol H       &HRM_right_index_v1_TKZ RSHFT J &HRM_right_middy_v1_TKZ RCTRL K &HRM_right_ring_v1_TKZ RALT L &HRM_right_pinky_v1_TKZ RGUI SEMI   &dqt_pair
+/* │    Lshift + 2xCAPSLCK      │ │       GUI(hold)/A          │ │        ALT(hold)/S         │ │      CTRL(hold)/D          │ │     SHIFT(hold)/F          │ │       SYMB(hold)/G         │                                                                                     │       SYMB(hold)/H         │ │     SHIFT(hold)/J          │ │      CTRL(hold)/K          │ │       ALT(hold)/L          │ │       GUI(hold)/;          │ │           ""               │ */
+            &kp LSHFT               &HRM_lh_pinky_TKZ LGUI A        &HRM_lh_ring_TKZ LALT S       &HRM_lh_middy_TKZ LCTRL D       &HRM_lh_index_TKZ LSHFT F       &lt_v2_TKZ LAYER_Symb G                                                                                             &lt_v2_TKZ LAYER_Symb H      &HRM_rh_index_TKZ RSHFT J     &HRM_rh_middy_TKZ RCTRL K       &HRM_rh_ring_TKZ RALT L       &HRM_rh_pinky_TKZ RGUI SEMI           &dqt_pair
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
 /* │          MAGIC             │ │            Z               │ │            X               │ │            C               │ │            V               │ │            B               │                                                                                     │            N               │ │            M               │ │          ,/<>              │ │            .               │ │            /               │ │          NUMPAD            │ */
-     &magic LAYER_Magic 0                    &kp Z                          &kp X                          &kp C                          &kp V                          &kp B                                                                                                              &kp N                          &kp M                      &comma_angle                      &kp DOT                        &kp FSLH                     &numpad_td
+        &magic LAYER_Magic 0                 &kp Z                          &kp X                          &kp C                          &kp V                          &kp B                                                                                                              &kp N                          &kp M                      &comma_angle                     &kp DOT                        &kp FSLH                     &numpad_td
 /* ╰────────────────────────────╯ ╰────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┼──────────────────────────────╯ */
 /*                                │         LCTRL              │ │          LALT              │ │           CMD              │                                                                                                                                                                                  │      LEFT/WORD-LEFT        │ │           DOWN             │ │     RIGHT/WORD-RIGHT       │ */
                                           &kp LCTRL                       &kp LALT                        &kp LGUI                                                                                                                                                                                                 &arrow_left LC(LEFT) LEFT          &upDownArrows            &arrow_right LC(RIGHT) RIGHT
 /*                                ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                                                                                                                  ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
 /*                                                                                              ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
-/*                                                                                              │      NAV(hold)/SPACE       │ │          ENTER             │ │       NUMPAD(hold)/?       │                                                                                     │       SYMB(hold)/.         │ │     BSPC/DEL-WORD          │ │      NAV(hold)/SPACE       │ */
-                                                                                                     &lt LAYER_Nav SPACE           &lt LAYER_Nav RET             &lt LAYER_Numpad QUESTION                                                                                          &lt LAYER_Symbol PERIOD        &bspc_word LA(BSPC) BSPC       &lt LAYER_Nav SPACE
+/*                                                                                              │      NAV(hold)/SPACE       │ │          ENTER             │ │       NUMPAD(hold)/?       │                                                                                     │       SYMB(hold)/.         │ │        BSPC/DEL-WORD       │ │      NAV(hold)/SPACE       │ */
+                                                                                                 &space_v3_TKZ LAYER_Nav SPACE    &lt_v2_TKZ LAYER_Num RET      &lt_v2_TKZ LAYER_Symb QMARK                                                                                       &lt_v2_TKZ LAYER_Symb PERIOD     &bspc_word LA(BSPC) BSPC     &space_v3_TKZ LAYER_Nav SPACE
 /*                                                                                              ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
             >;
         };
@@ -992,19 +1009,19 @@
             bindings = <
 /* ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /* │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │                                                                                     │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │ */
-             &trans                         &trans                         &trans                         &trans                         &trans                         &trans                                                                                                             &trans                         &trans                         &trans                         &trans                         &trans                          &trans
+             &trans                         &trans                         &trans                         &trans                         &trans                         &trans                                                                                                            &trans                          &trans                         &trans                         &trans                         &trans                          &trans
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
 /* │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │                                                                                     │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │ */
-             &trans                         &trans                         &trans                         &trans                         &trans                         &trans                                                                                                             &trans                         &trans                         &trans                         &trans                         &trans                          &trans
+             &trans                         &trans                         &trans                         &trans                         &trans                         &trans                                                                                                            &trans                          &trans                         &trans                         &trans                         &trans                          &trans
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
 /* │           ---              │ │            A               │ │            S               │ │            D               │ │            F               │ │           ---              │                                                                                     │           ---              │ │            J               │ │            K               │ │            L               │ │          SEMI              │ │           ---              │ */
-             &trans                          &kp A                          &kp S                          &kp D                          &kp F                          &trans                                                                                                            &trans                          &kp J                          &kp K                          &kp L                         &kp SEMI                        &trans
+             &trans                         &kp A                          &kp S                          &kp D                          &kp F                          &trans                                                                                                            &trans                          &kp J                          &kp K                          &kp L                         &kp SEMI                        &trans
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
 /* │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │                                                                                     │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │ */
-             &trans                         &trans                         &trans                         &trans                         &trans                          &trans                                                                                                            &trans                         &trans                          &trans                         &trans                         &trans                         &trans
+             &trans                         &trans                         &trans                         &trans                         &trans                         &trans                                                                                                            &trans                          &trans                         &trans                         &trans                        &trans                          &trans
 /* ╰────────────────────────────╯ ╰────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┼──────────────────────────────╯ */
-/*                                │          TRANS             │ │         TRANS              │ │          TRANS             │                                                                                                                                                                                  │           TRANS            │ │           TRANS            │ │           TRANS            │ */
-                                            &trans                         &trans                         &trans                                                                                                                                                                                                           &trans                         &trans                         &trans
+/*                                │          TRANS             │ │         TRANS              │ │          TRANS             │                                                                                                                                                                                  │           TRANS            │ │          TRANS             │ │           TRANS            │ */
+                                            &trans                         &trans                         &trans                                                                                                                                                                                                          &trans                         &trans                         &trans
 /*                                ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                                                                                                                  ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
 /*                                                                                              ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /*                                                                                              │          TRANS             │ │            TRANS           │ │            TRANS           │                                                                                     │          TRANS             │ │           TRANS            │ │          TRANS             │ */
@@ -1020,23 +1037,23 @@
             bindings = <
 /* ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /* │        AS EQUAL            │ │          AS 1              │ │          AS 2              │ │          AS 3              │ │          AS 4              │ │          AS 5              │                                                                                     │          AS 6              │ │          AS 7              │ │          AS 8              │ │          AS 9              │ │          AS 0              │ │        AS MINUS            │ */
-        &AS_v1_TKZ EQUAL                  &AS_v1_TKZ N1                  &AS_v1_TKZ N2                  &AS_v1_TKZ N3                  &AS_v1_TKZ N4                  &AS_v1_TKZ N5                                                                                                      &AS_v1_TKZ N6                  &AS_v1_TKZ N7                  &AS_v1_TKZ N8                  &AS_v1_TKZ N9                  &AS_v1_TKZ N0              &AS_v1_TKZ MINUS
+         &AS_TKZ EQUAL                    &AS_TKZ N1                      &AS_TKZ N2                   &AS_TKZ N3                     &AS_TKZ N4                      &AS_TKZ N5                                                                                                         &AS_TKZ N6                     &AS_TKZ N7                     &AS_TKZ N8                     &AS_TKZ N9                     &AS_TKZ N0                     &AS_TKZ MINUS
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
 /* │          TRANS             │ │          AS Q              │ │          AS W              │ │          AS E              │ │          AS R              │ │          AS T              │                                                                                     │          AS Y              │ │          AS U              │ │          AS I              │ │          AS O              │ │          AS P              │ │        AS BSLH             │ */
-               &trans                     &AS_v1_TKZ Q                   &AS_v1_TKZ W                   &AS_v1_TKZ E                   &AS_v1_TKZ R                   &AS_v1_TKZ T                                                                                                       &AS_v1_TKZ Y                   &AS_v1_TKZ U                   &AS_v1_TKZ I                   &AS_v1_TKZ O                   &AS_v1_TKZ P               &AS_v1_TKZ BSLH
+             &trans                       &AS_TKZ Q                       &AS_TKZ W                    &AS_TKZ E                      &AS_TKZ R                       &AS_TKZ T                                                                                                          &AS_TKZ Y                      &AS_TKZ U                      &AS_TKZ I                      &AS_TKZ O                      &AS_TKZ P                      &AS_TKZ BSLH
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
 /* │          TRANS             │ │          AS A              │ │          AS S              │ │          AS D              │ │          AS F              │ │          AS G              │                                                                                     │          AS H              │ │          AS J              │ │          AS K              │ │          AS L              │ │        AS SEMI             │ │        AS QUOTE            │ */
-               &trans                     &AS_v1_TKZ A                   &AS_v1_TKZ S                   &AS_v1_TKZ D                   &AS_v1_TKZ F                   &AS_v1_TKZ G                                                                                                       &AS_v1_TKZ H                   &AS_v1_TKZ J                   &AS_v1_TKZ K                   &AS_v1_TKZ L                &AS_v1_TKZ SEMI                &AS_v1_TKZ SQT
+               &trans                     &AS_TKZ A                       &AS_TKZ S                   &AS_TKZ D                       &AS_TKZ F                       &AS_TKZ G                                                                                                          &AS_TKZ H                      &AS_TKZ J                      &AS_TKZ K                      &AS_TKZ L                      &AS_TKZ SEMI                   &AS_TKZ SQT
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
 /* │          MAGIC             │ │          AS Z              │ │          AS X              │ │          AS C              │ │          AS V              │ │          AS B              │                                                                                     │          AS N              │ │          AS M              │ │       AS COMMA             │ │         AS DOT             │ │        AS FSLH             │ │          TRANS             │ */
-       &magic LAYER_Magic 0               &AS_v1_TKZ Z                   &AS_v1_TKZ X                   &AS_v1_TKZ C                   &AS_v1_TKZ V                   &AS_v1_TKZ B                                                                                                       &AS_v1_TKZ N                      &AS_v1_TKZ M                &AS_v1_TKZ COMMA                 &AS_v1_TKZ DOT                &AS_v1_TKZ FSLH                    &trans
+       &magic LAYER_Magic 0               &AS_TKZ Z                       &AS_TKZ X                   &AS_TKZ C                       &AS_TKZ V                       &AS_TKZ B                                                                                                          &AS_TKZ N                      &AS_TKZ M                     &AS_TKZ COMMA                  &AS_TKZ DOT                     &AS_TKZ FSLH                      &trans
 /* ╰────────────────────────────╯ ╰────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┼──────────────────────────────╯ */
-/*                                │         TRANS              │ │          TRANS             │ │          TRANS             │                                                                                                                                                                                  │          TRANS             │ │          TRANS             │ │          TRANS             │ */
-                                            &trans                         &trans                         &trans                                                                                                                                                                                                           &trans                         &trans                         &trans
+/*                                │         TRANS              │ │          TRANS             │ │          TRANS             │                                                                                                                                                                                  │          TRANS             │ │         TRANS             │ │          TRANS             │ */
+                                            &trans                         &trans                         &trans                                                                                                                                                                                                           &trans                         &trans                        &trans
 /*                                ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                                                                                                                  ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
 /*                                                                                              ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /*                                                                                              │          TRANS             │ │            TRANS           │ │            TRANS           │                                                                                     │          TRANS             │ │         TRANS              │ │          TRANS             │ */
-                                                                                                           &trans                          &trans                         &trans                                                                                                            &trans                          &trans                       &trans
+                                                                                                           &trans                          &trans                         &trans                                                                                                            &trans                        &trans                          &trans
 /*                                                                                              ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
             >;
         };
@@ -1047,20 +1064,20 @@
         layer_Nav {
             bindings = <
 /* ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
-/* │        LOCK SCREEN         │ │          UNDO              │ │      SCROLL UP             │ │        SCREENSHOT          │ │      RIGHT CLICK           │ │           ---              │                                                                                     │           ---              │ │         RIGHT CLICK        │ │           ---              │ │           ---              │ │           ---              │ │        DEL WORD            │ */
-           &kp LC(LG(Q))                   &kp LC(Z)                   &msc SCRL_UP                     &screenshot                    &mkp RCLK                         &none                                                                                                              &none                         &mkp RCLK                       &none                          &none                          &none                       &kp LC(BSPC)
+/* │            ESC             │ │             ---            │ │      SCROLL UP             │ │        SCREENSHOT          │ │      RIGHT CLICK           │ │           ---              │                                                                                     │           ---              │ │         RIGHT CLICK        │ │           ---              │ │           ---              │ │           ---              │ │        DEL WORD            │ */
+              &kp ESC                        &none                      &msc SCRL_UP                     &screenshot                    &mkp RCLK                        &none                                                                                                              &none                         &mkp RCLK                       &none                          &none                          &none                       &kp LC(BSPC)
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
-/* │           ---              │ │        SELECT ALL          │ │        SCROLL DOWN         │ │        MOUSE UP            │ │       LEFT CLICK           │ │           ---              │                                                                                     │           ---              │ │       LEFT CLICK           │ │          UP                │ │        SCROLL UP           │ │         PAGE UP            │ │       DEL WORD FWD         │ */
-              &none                         &kp LC(A)                   &msc SCRL_DOWN                  &mmv MOVE_UP                    &mkp LCLK                        &none                                                                                                              &none                        &mkp LCLK                       &kp UP                        &msc SCRL_UP                   &kp PG_UP                      &kp LC(DEL)
+/* │        LOCK SCREEN         │ │        SELECT ALL          │ │        SCROLL DOWN         │ │        MOUSE UP            │ │       LEFT CLICK           │ │           ---              │                                                                                     │           ---              │ │       LEFT CLICK           │ │          UP                │ │        SCROLL UP           │ │         PAGE UP            │ │       DEL WORD FWD         │ */
+           &kp LC(LG(Q))                   &kp LC(A)                   &msc SCRL_DOWN                  &mmv MOVE_UP                    &mkp LCLK                         &none                                                                                                              &none                        &mkp LCLK                       &kp UP                        &msc SCRL_UP                   &kp PG_UP                      &kp LC(DEL)
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
-/* │           ---              │ │        STICKY CTRL         │ │       MOUSE LEFT           │ │       MOUSE DOWN           │ │       MOUSE RIGHT          │ │           ---              │                                                                                     │           ---               │ │          LEFT             │ │          DOWN              │ │          RIGHT             │ │        PAGE DOWN           │ │           ---              │ */
+/* │           ---              │ │        STICKY CTRL         │ │       MOUSE LEFT           │ │       MOUSE DOWN           │ │       MOUSE RIGHT          │ │           ---              │                                                                                     │           ---              │ │           LEFT             │ │          DOWN              │ │          RIGHT             │ │        PAGE DOWN           │ │           ---              │ */
               &none                         &sk LCTRL                  &mmv MOVE_LEFT                 &mmv MOVE_DOWN                 &mmv MOVE_RIGHT                     &none                                                                                                              &none                         &kp LEFT                       &kp DOWN                       &kp RIGHT                      &kp PG_DN                       &none
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
-/* │          MAGIC             │ │           ---              │ │            ---             │ │          ---               │ │           ---              │ │           ---              │                                                                                     │           ---              │ │          HOME              │ │           ---              │ │           END              │ │           ---              │ │         TO BASE            │ */
-     &magic LAYER_Magic 0                     &none                          &none                        &none                          &none                           &none                                                                                                              &none                          &kp HOME                       &none                          &kp END                        &none                       &to LAYER_Base
+/* │          MAGIC             │ │           UNDO             │ │           CUT             │ │            COPY             │ │           PASTE            │ │           ---              │                                                                                     │           ---              │ │          HOME              │ │           ---              │ │           END              │ │           ---              │ │         TO BASE            │ */
+     &magic LAYER_Magic 0                  &kp LC(Z)                      &kp LC(Z)                     &kp LC(C)                      &kp LC(C)                         &none                                                                                                              &none                          &kp HOME                       &none                          &kp END                        &none                       &to LAYER_Base
 /* ╰────────────────────────────╯ ╰────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┼──────────────────────────────╯ */
 /*                                │          TRANS             │ │          TRANS             │ │          TRANS             │                                                                                                                                                                                  │       SELECT LINE          │ │        SELECT WORD         │ │          TRANS             │ */
-                                             &none                         &trans                          &trans                                                                                                                                                                                                &cur_SELECT_LINE_macos_v1_TKZ &cur_SELECT_WORD_macos_v1_TKZ             &trans
+                                             &none                         &trans                          &trans                                                                                                                                                                                                &cur_SELECT_LINE_macos_TKZ      &cur_SELECT_WORD_macos_TKZ             &trans
 /*                                ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                                                                                                                  ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
 /*                                                                                              ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /*                                                                                              │          TRANS             │ │            TRANS           │ │            TRANS           │                                                                                     │          TRANS             │ │         TRANS              │ │          TRANS             │ */
@@ -1072,7 +1089,7 @@
 /* -------------------------------------------------------------------------- */
 /*                         LAYER 4: Symbol Layer                              */
 /* -------------------------------------------------------------------------- */
-        layer_Symbol {
+        LAYER_Symb {
             bindings = <
 /* ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /* │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │                                                                                     │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │ │          TRANS             │ */
@@ -1092,7 +1109,7 @@
 /*                                ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                                                                                                                  ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
 /*                                                                                              ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /*                                                                                              │          TO BASE           │ │          TRANS             │ │          TRANS             │                                                                                     │          TRANS             │ │          TRANS             │ │          TRANS             │ */
-                                                                                                     &to LAYER_Base                      &trans                         &trans                                                                                                             &trans                         &trans                         &trans
+                                                                                                      &to LAYER_Base                      &trans                         &trans                                                                                                             &trans                         &trans                         &trans
 /*                                                                                              ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
             >;
         };
@@ -1120,7 +1137,7 @@
 /*                                ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                                                                                                                  ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
 /*                                                                                              ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /*                                                                                              │          TRANS             │ │            TRANS           │ │            TRANS           │                                                                                     │          TRANS             │ │         TRANS              │ │          TRANS             │ */
-                                                                                                           &trans                          &trans                         &trans                                                                                                            &trans                          &trans                       &trans
+                                                                                                           &trans                          &trans                         &trans                                                                                                            &trans                        &trans                         &trans
 /*                                                                                              ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
             >;
         };
@@ -1128,7 +1145,7 @@
 /* -------------------------------------------------------------------------- */
 /*                         LAYER 6: Numpad Layer                              */
 /* -------------------------------------------------------------------------- */
-        layer_Numpad {
+        LAYER_Num {
             bindings = <
 /* ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /* │           ---              │ │            F1              │ │            F2              │ │            F3              │ │            F4              │ │            F5              │                                                                                     │            F6              │ │            F7              │ │            F8              │ │            F9              │ │           F10              │ │           F11              │ */
@@ -1148,7 +1165,7 @@
 /*                                ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                                                                                                                  ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
 /*                                                                                              ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /*                                                                                              │        MO SYMB             │ │          TRANS             │ │          TRANS             │                                                                                     │          TRANS             │ │          TRANS             │ │          TRANS             │ */
-                                                                                                     &mo LAYER_Symbol                    &trans                         &trans                                                                                                              &trans                         &trans                         &trans
+                                                                                                     &mo LAYER_Symb                    &trans                         &trans                                                                                                                &trans                         &trans                         &trans
 /*                                                                                              ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
             >;
         };
@@ -1159,17 +1176,17 @@
         layer_Cursor {
             bindings = <
 /* ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
-/* │          ---               │ │          ---               │ │          ---               │ │          ---               │ │          ---               │ │          ---               │                                                                                     │          ---               │ │          ---               │ │          ---               │ │          ---               │ │          ---               │ │          ---               │ */
-              &none                          &none                          &none                          &none                          &none                          &none                                                                                                              &none                          &none                          &none                          &none                          &none                          &none
+/* │          ---               │ │          ---               │ │         SCROLL UP          │ │            ---             │ │        RIGHT CLICK         │ │          ---               │                                                                                     │          ---               │ │          ---               │ │          ---               │ │          ---               │ │          ---               │ │          ---               │ */
+              &none                          &none                       &msc SCRL_UP                       &none                      &mkp RCLK                         &none                                                                                                              &none                          &none                          &none                          &none                         &none                          &none
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
-/* │          ---               │ │          ---               │ │      SCROLL LEFT           │ │       MOUSE UP             │ │      SCROLL RIGHT          │ │          ---               │                                                                                     │          ---               │ │       SK RSHIFT            │ │       SK RCTRL             │ │       SK RALT              │ │       SK RGUI              │ │          ---               │ */
-              &none                          &none                      &msc SCRL_LEFT                  &mmv MOVE_UP                    &msc SCRL_RIGHT                     &none                                                                                                           &none                        &sk RSHFT                     &sk RCTRL                      &sk RALT                       &sk RGUI                          &none
+/* │          ---               │ │          ---               │ │      SCROLL DOWN           │ │       MOUSE UP             │ │        LEFT CLICK          │ │          ---               │                                                                                     │          ---               │ │       SK RSHIFT            │ │         SK RCTRL           │ │           SK RALT          │ │          SK RGUI          │ │          ---               │ */
+              &none                          &none                      &msc SCRL_DOWN                  &mmv MOVE_UP                    &mkp LCLK                        &none                                                                                                              &none                        &sk RSHFT                       &sk RCTRL                        &sk RALT                      &sk RGUI                        &none
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
-/* │          ---               │ │      SCROLL UP             │ │       MOUSE LEFT           │ │      MOUSE DOWN            │ │      MOUSE RIGHT           │ │       SCROLL UP            │                                                                                     │      SCROLL UP             │ │      MO MOUSEFAST          │ │      MO MOUSEWARP          │ │      MO MOUSESLOW          │ │       LEFT CLICK           │ │          MB4               │ */
-              &none                       &msc SCRL_UP                   &mmv MOVE_LEFT                 &mmv MOVE_DOWN                 &mmv MOVE_RIGHT                 &msc SCRL_UP                                                                                                      &msc SCRL_UP                &mo LAYER_MouseFast            &mo LAYER_MouseWarp            &mo LAYER_MouseSlow                &mkp LCLK                         &mkp MB4
+/* │          ---               │ │         SCROLL UP          │ │       MOUSE LEFT           │ │         MOUSE DOWN         │ │      MOUSE RIGHT           │ │       SCROLL UP            │                                                                                     │        SCROLL UP           │ │      MO MOUSEFAST          │ │        MO MOUSEWARP        │ │      MO MOUSESLOW          │ │         LEFT CLICK         │ │          MB4               │ */
+              &none                       &msc SCRL_UP                   &mmv MOVE_LEFT                 &mmv MOVE_DOWN                &mmv MOVE_RIGHT                 &msc SCRL_UP                                                                                                       &msc SCRL_UP                 &mo LAYER_MouseFast            &mo LAYER_MouseWarp            &mo LAYER_MouseSlow                &mkp LCLK                       &mkp MB4
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
-/* │          ---               │ │      SCROLL DOWN           │ │      MO MOUSESLOW          │ │      MO MOUSEWARP          │ │      MO MOUSEFAST          │ │      SCROLL DOWN           │                                                                                     │      SCROLL DOWN           │ │      SCROLL LEFT           │ │        MOUSE UP            │ │      SCROLL RIGHT          │ │      RIGHT CLICK           │ │          MB5               │ */
-              &none                      &msc SCRL_DOWN              &mo LAYER_MouseSlow            &mo LAYER_MouseWarp            &mo LAYER_MouseFast             &msc SCRL_DOWN                                                                                                     &msc SCRL_DOWN                 &msc SCRL_LEFT                    &mmv MOVE_UP                  &msc SCRL_RIGHT                  &mkp RCLK                        &mkp MB5
+/* │          ---               │ │      SCROLL DOWN           │ │       MO MOUSESLOW         │ │         MO MOUSEWARP       │ │      MO MOUSEFAST          │ │            ---             │                                                                                     │        SCROLL DOWN         │ │        SCROLL LEFT         │ │          MOUSE UP          │ │        SCROLL RIGHT        │ │        RIGHT CLICK         │ │          MB5               │ */
+              &none                      &msc SCRL_DOWN               &mo LAYER_MouseSlow            &mo LAYER_MouseWarp            &mo LAYER_MouseFast                 &none                                                                                                          &msc SCRL_DOWN                 &msc SCRL_LEFT                    &mmv MOVE_UP                 &msc SCRL_RIGHT                   &mkp RCLK                       &mkp MB5
 /* ╰────────────────────────────╯ ╰────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┼──────────────────────────────╯ */
 /*                                │          TRANS             │ │            TRANS           │ │            TRANS           │                                                                                                                                                                                  │            TRANS           │ │            TRANS           │ │            TRANS           │ */
                                             &trans                           &trans                         &trans                                                                                                                                                                                                           &trans                         &trans                         &trans
@@ -1199,11 +1216,11 @@
              &trans                         &trans                         &trans                         &trans                         &trans                         &trans                                                                                                             &trans                         &trans                         &trans                         &trans                         &trans                         &trans
 /* ╰────────────────────────────╯ ╰────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┼──────────────────────────────╯ */
 /*                                │          TRANS             │ │          TRANS             │ │          TRANS             │                                                                                                                                                                                  │          TRANS             │ │          TRANS             │ │          TRANS             │ */
-                                            &trans                         &trans                         &trans                                                                                                                                                                                                           &trans                         &trans                         &trans
+                                            &trans                         &trans                         &trans                                                                                                                                                                                                           &trans                        &trans                         &trans
 /*                                ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                                                                                                                  ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
 /*                                                                                              ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /*                                                                                              │          TRANS             │ │          TRANS             │ │          TRANS             │                                                                                     │          TRANS             │ │          TRANS             │ │          TRANS             │ */
-                                                                                                           &trans                         &trans                         &trans                                                                                                             &trans                         &trans                         &trans
+                                                                                                          &trans                         &trans                         &trans                                                                                                             &trans                        &trans                         &trans
 /*                                                                                              ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
             >;
         };
@@ -1283,11 +1300,11 @@
               &none                         &none                          &bt_0                          &bt_1                          &bt_2                          &bt_3                                                                                                               &none                          &none                          &none                          &none                          &none                          &none
 /* ╰────────────────────────────╯ ╰────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┼──────────────────────────────╯ */
 /*                                │         OUT USB            │ │           ---              │ │           ---              │                                                                                                                                                                                  │           ---              │ │           ---              │ │           ---              │ */
-                                        &out OUT_USB                        &none                      &to LAYER_Typing                                                                                                                                                                                                    &none                          &none                          &none
+                                         &out OUT_USB                       &none                      &to LAYER_Typing                                                                                                                                                                                                    &none                          &none                          &none
 /*                                ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                                                                                                                  ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
 /*                                                                                              ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /*                                                                                              │           ---              │ │           ---              │ │           ---              │                                                                                     │           ---              │ │           ---              │ │           ---              │ */
-                                                                                                           &none                          &none                     &to LAYER_Autoshift                                                                                                     &none                          &none                          &none
+                                                                                                           &hyper                          &none                     &to LAYER_Autoshift                                                                                                     &none                          &none                          &none
 /*                                                                                              ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
             >;
         };
