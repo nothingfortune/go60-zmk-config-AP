@@ -486,14 +486,12 @@
             bindings = <&kp>, <&kp>;
         };
 
-        /* Tab with Hyper key on hold */
+        /* Tab with Hyper key on double-tap */
         tab_hyper: tab_hyper {
-            compatible = "zmk,behavior-hold-tap";
+            compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            flavor = "balanced";
             tapping-term-ms = <200>;
-            quick-tap-ms = <150>;
-            bindings = <&hyper_key>, <&kp TAB>;
+            bindings = <&kp TAB>, <&hyper_key>;
         };
     };
 
