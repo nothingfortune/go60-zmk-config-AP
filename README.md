@@ -2,22 +2,23 @@
 
 ![MoErgo Logo](moergo_logo.png)
 
-This repo is the official ZMK configuration of the MoErgo Go60 wireless split keyboard. Use it to develop your own keymap and easily build your own ZMK firmware to run on your Go60.
+This repo is a fork official ZMK configuration of the MoErgo Go60 wireless split keyboard. 
 
-**NOTE: You can also customize the layout of your Go60 keyboard with the Go60 Layout Editor webapp. For most users Go60 Layout Editor is the recommended and simpler option. More information is available at the official MoErgo Go60 Support site (see resources below).**
-
-These steps will get you using your keymap on your keyboard in the fastest time possible. It uses the GitHub Actions feature to build your firmware online.
-
-If you are looking to dig deeper into ZMK and develop new functionality, it is recommended to follow the steps of installing ZMK as found on the official ZMK documentation site (linked below).
+Keymaps have been adjusted and refined based on personal preferences.
 
 ## Resources
 - The [official MoErgo Go60 Support](https://moergo.com/go60-support) web site. Go60 documentation and other technical resources.
+
 - The [official MoErgo Discord Server](https://moergo.com/discord). Instant conversations with other Go60 users.
 
 - The [official ZMK Documentation](https://zmk.dev/docs) web site. Find the answers to many of your questions about ZMK Firmware.
 - The [official ZMK Discord Server](https://discord.gg/8cfMkQksSB). Instant conversations with other ZMK developers and users. Great technical resource!
 
 - The [official MoErgo ZMK Distribution](https://github.com/moergo-sc/zmk). Repository for ZMK firmware customized for Go60 and Glove80.
+
+- The [ZMK Helpers v2] (https://github.com/urob/zmk-helpers/).
+This is a collection of helper macros (formerly zmk-nodefree-config), simplifying the configuration of ZMK keymaps.
+
 
 ## Instructions
 1. Log into, or sign up for, your personal GitHub account.
@@ -35,6 +36,117 @@ To locate your firmware files and reflash your Go60...
 6. Flash the firmware to Go60 according to the user documentation on the official Go60 Support website (linked above)
 
 Your keyboard is now ready to use.
+
+## Configuration Features
+
+### Layer Architecture (12 Layers)
+
+This configuration implements a comprehensive 12-layer system optimized for ergonomic typing and advanced functionality:
+
+**Primary Layers:**
+- **Layer 0 - Base (QWERTY)**: Standard QWERTY with bilateral home row mods (GACS order)
+- **Layer 1 - Typing**: Alternative typing layer accessible via Magic layer
+- **Layer 2 - Autoshift**: Auto-capitalization on hold for all alphanumeric keys
+
+**Navigation & Input:**
+- **Layer 3 - Nav**: Navigation layer with arrow keys and modifier access (hold Space/Enter)
+- **Layer 4 - Symbol**: Symbol layer on home row (hold G/H or thumb keys)
+- **Layer 6 - Numpad**: Full numpad layout (tap dance on bottom right key)
+
+**Specialized Functions:**
+- **Layer 5 - Gaming**: Toggle layer that disables home row mods for gaming
+- **Layer 7 - Cursor**: Advanced cursor control with mouse and scroll functions
+- **Layer 8 - MouseSlow**: Precision mouse movement (1:9 speed scaling)
+- **Layer 9 - MouseFast**: Fast mouse movement (3:1 speed scaling)
+- **Layer 10 - MouseWarp**: Warp-speed mouse movement (12:1 speed scaling)
+- **Layer 11 - Magic**: System control (RGB, Bluetooth, layer switching)
+
+### Home Row Mods (Bilateral)
+
+**Configuration:** TailorKey-style bilateral home row mods prevent accidental activation during same-hand typing.
+
+**Left Hand (GACS):**
+- A = GUI (⌘ Cmd on macOS)
+- S = ALT (⌥ Option)
+- D = CTRL (⌃ Control)
+- F = SHIFT (⇧ Shift)
+
+**Right Hand (SCAG):**
+- J = SHIFT (⇧ Shift)
+- K = CTRL (⌃ Control)
+- L = ALT (⌥ Option)
+- ; = GUI (⌘ Cmd)
+
+**Timing Configuration:**
+- Index fingers: 190ms tapping-term (fastest)
+- Middle fingers: 210ms tapping-term
+- Ring fingers: 240ms tapping-term
+- Pinky fingers: 280ms tapping-term (slowest)
+- `hold-trigger-on-release` enabled for more reliable modifier activation
+
+### Combos
+
+**Function Keys (F1-F12):**
+- F1-F5: Left hand column pairs (rows 1+2)
+- F6-F9: Right hand column pairs (rows 1+2)
+- F10-F12: Right hand special combinations
+
+**Modifiers:**
+- Both thumb T1 keys: Caps Lock
+- Right pinky combos: Sticky Hyper (⌘⌃⌥⇧) and Meh (⌃⌥⇧)
+- Left hand combos: Alt+Tab (CTRL) and Cmd+Tab (GUI) with cursor layer access
+
+**Layer Access:**
+- Gaming toggle: Left hand bottom corner combo
+
+### Cirque Trackpad Integration
+
+**Left Trackpad (Scroll):**
+- Default: Scroll mode with Y-axis invert
+- MouseSlow: 5:14 scaling
+- MouseFast: 3:2 scaling
+- MouseWarp: 13:3 scaling
+
+**Right Trackpad (Cursor):**
+- Default: Mouse cursor with 2-second temporary Cursor layer activation
+- MouseSlow: 1:1 scaling (precision)
+- MouseFast: 4:1 scaling
+- MouseWarp: 6:1 scaling (rapid positioning)
+
+### Special Features
+
+**Auto-Pair Brackets:**
+- Mod-morph behaviors automatically insert paired brackets with cursor repositioning
+- N9 key: Types `()` with cursor between when modifier held
+- Comma key: Types `<>` when modifier held
+- Double-quote key: Types `""` when modifier held
+
+**Smart Behaviors:**
+- Grave/Escape: Context-aware ESC/` key
+- Backspace: Hold for word deletion (Option+Backspace)
+- Arrow keys: Hold for word jump navigation
+- Magic key: Hold for Magic layer, tap for RGB status
+
+**macOS Optimizations:**
+- Screenshot macro (⌘⇧4)
+- Hyper key macro (⌘⌃⌥⇧) for Raycast/Alfred
+- Cursor selection macros (select word, line, extend selection)
+- Mod-tab switchers for app switching with cursor navigation
+
+### Layer Access Quick Reference
+
+| Layer | Activation Method |
+|-------|------------------|
+| Base | Default layer |
+| Typing | Magic layer → Key binding |
+| Autoshift | Magic layer → Thumb key |
+| Nav | Hold Space or Enter |
+| Symbol | Hold G, H, or thumb keys |
+| Gaming | Combo toggle |
+| Numpad | Tap dance bottom right key |
+| Cursor | Alt+Tab or Cmd+Tab combos |
+| MouseSlow/Fast/Warp | Hold keys in Cursor layer |
+| Magic | Hold bottom left key |
 
 ## Keyboard Layout Reference Materials
 
