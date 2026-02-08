@@ -258,9 +258,10 @@
         num_ht: num_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "tap-unless-interrupted";
-            tapping-term-ms = <170>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
             quick-tap-ms = <150>;
+            require-prior-idle-ms = <100>;
             bindings = <&kp>, <&kp>;
         };
 
