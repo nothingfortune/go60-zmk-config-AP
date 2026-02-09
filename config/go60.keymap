@@ -206,8 +206,9 @@
             compatible = "zmk,behavior-hold-tap";
             label = "MAGIC_HOLD_TAP";
             #binding-cells = <2>;
-            flavor = "tap-preferred";
+            flavor = "hold-preferred";
             tapping-term-ms = <200>;
+            require-prior-idle-ms = <250>;
             bindings = <&mo>, <&rgb_ug_status_macro>;
         };
 
@@ -293,14 +294,15 @@
             mods = <(MOD_LSFT|MOD_RSFT|MOD_LCTL|MOD_RCTL|MOD_LALT|MOD_RALT|MOD_LGUI|MOD_RGUI)>;
         };
 
-        /* Double quote key - outputs " normally, pair_dquote ("") when any modifier is held */
+        /* Double quote key - outputs ' normally, pair_dquote ("") when any modifier is held */
         dqt_pair: double_quote_pair {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp DQT>, <&pair_dquote>;
+            bindings = <&kp SQT>, <&pair_dquote>;
             mods = <(MOD_LSFT|MOD_RSFT|MOD_LCTL|MOD_RCTL|MOD_LALT|MOD_RALT|MOD_LGUI|MOD_RGUI)>;
         };
 
+        /* Up and Down arrows - outputs up/down normally, swap them when any modifier is held */
         upDownArrows: up_down_arrows {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -329,7 +331,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <160>;
             bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
+            flavor = "hold-preferred";
             quick-tap-ms = <175>;
             require-prior-idle-ms = <125>;
             hold-trigger-key-positions = <POS_RH_T3 POS_RH_T2 POS_RH_T1 POS_RH_C1R1 POS_RH_C2R1 POS_RH_C3R1 POS_RH_C4R1 POS_RH_C5R1 POS_RH_C1R2 POS_RH_C2R2 POS_RH_C3R2 POS_RH_C4R2 POS_RH_C5R2 POS_RH_C1R3 POS_RH_C2R3 POS_RH_C3R3 POS_RH_C4R3 POS_RH_C5R3 POS_RH_C1R4 POS_RH_C2R4 POS_RH_C3R4 POS_RH_C4R4 POS_RH_C5R4 POS_RH_C2R5 POS_RH_C3R5 POS_RH_C4R5 POS_RH_C6R1 POS_RH_C6R2 POS_RH_C6R3 POS_RH_C6R4 POS_LH_T2 POS_LH_T3 POS_LH_T1>;
@@ -342,7 +344,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <175>;
             bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
+            flavor = "hold-preferred";
             quick-tap-ms = <175>;
             require-prior-idle-ms = <125>;
             hold-trigger-key-positions = <POS_RH_T3 POS_RH_T2 POS_RH_T1 POS_RH_C1R1 POS_RH_C2R1 POS_RH_C3R1 POS_RH_C4R1 POS_RH_C5R1 POS_RH_C1R2 POS_RH_C2R2 POS_RH_C3R2 POS_RH_C4R2 POS_RH_C5R2 POS_RH_C1R3 POS_RH_C2R3 POS_RH_C3R3 POS_RH_C4R3 POS_RH_C5R3 POS_RH_C1R4 POS_RH_C2R4 POS_RH_C3R4 POS_RH_C4R4 POS_RH_C5R4 POS_RH_C2R5 POS_RH_C3R5 POS_RH_C4R5 POS_RH_C6R1 POS_RH_C6R2 POS_RH_C6R3 POS_RH_C6R4 POS_LH_T1 POS_LH_T2 POS_LH_T3>;
@@ -355,7 +357,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <190>;
             bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
+            flavor = "hold-preferred";
             quick-tap-ms = <175>;
             require-prior-idle-ms = <125>;
             hold-trigger-key-positions = <POS_RH_T3 POS_RH_T2 POS_RH_T1 POS_RH_C1R1 POS_RH_C2R1 POS_RH_C3R1 POS_RH_C4R1 POS_RH_C5R1 POS_RH_C6R1 POS_RH_C2R2 POS_RH_C3R2 POS_RH_C4R2 POS_RH_C5R2 POS_RH_C6R2 POS_RH_C3R3 POS_RH_C4R3 POS_RH_C5R3 POS_RH_C6R3 POS_RH_C3R4 POS_RH_C4R4 POS_RH_C5R4 POS_RH_C6R4 POS_RH_C1R2 POS_RH_C1R3 POS_RH_C2R3 POS_RH_C1R4 POS_RH_C2R4 POS_RH_C2R5 POS_RH_C3R5 POS_RH_C4R5 POS_LH_T1 POS_LH_T2 POS_LH_T3>;
@@ -368,7 +370,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
+            flavor = "hold-preferred";
             quick-tap-ms = <175>;
             require-prior-idle-ms = <125>;
             hold-trigger-key-positions = <POS_RH_T3 POS_RH_T2 POS_RH_T1 POS_RH_C1R1 POS_RH_C2R1 POS_RH_C3R1 POS_RH_C4R1 POS_RH_C5R1 POS_RH_C1R2 POS_RH_C2R2 POS_RH_C3R2 POS_RH_C4R2 POS_RH_C5R2 POS_RH_C1R3 POS_RH_C2R3 POS_RH_C3R3 POS_RH_C4R3 POS_RH_C5R3 POS_RH_C1R4 POS_RH_C2R4 POS_RH_C3R4 POS_RH_C4R4 POS_RH_C5R4 POS_RH_C2R5 POS_RH_C3R5 POS_RH_C4R5 POS_RH_C6R1 POS_RH_C6R2 POS_RH_C6R3 POS_RH_C6R4 POS_LH_T1 POS_LH_T2 POS_LH_T3>;
@@ -381,7 +383,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <160>;
             bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
+            flavor = "hold-preferred";
             quick-tap-ms = <175>;
             require-prior-idle-ms = <125>;
             hold-trigger-key-positions = <POS_LH_T3 POS_LH_T2 POS_LH_T1 POS_LH_C6R1 POS_LH_C5R1 POS_LH_C4R1 POS_LH_C3R1 POS_LH_C2R1 POS_LH_C6R2 POS_LH_C5R2 POS_LH_C4R2 POS_LH_C3R2 POS_LH_C2R2 POS_LH_C1R2 POS_LH_C6R3 POS_LH_C5R3 POS_LH_C4R3 POS_LH_C3R3 POS_LH_C2R3 POS_LH_C1R3 POS_LH_C6R4 POS_LH_C5R4 POS_LH_C4R4 POS_LH_C3R4 POS_LH_C2R4 POS_LH_C1R4 POS_LH_C4R5 POS_LH_C3R5 POS_LH_C2R5 POS_LH_C1R1 POS_RH_T3 POS_RH_T2 POS_RH_T1>;
@@ -394,7 +396,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <175>;
             bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
+            flavor = "hold-preferred";
             quick-tap-ms = <175>;
             require-prior-idle-ms = <125>;
             hold-trigger-key-positions = <POS_LH_T3 POS_LH_T2 POS_LH_T1 POS_LH_C6R1 POS_LH_C5R1 POS_LH_C4R1 POS_LH_C3R1 POS_LH_C2R1 POS_LH_C6R2 POS_LH_C5R2 POS_LH_C4R2 POS_LH_C3R2 POS_LH_C2R2 POS_LH_C1R2 POS_LH_C6R3 POS_LH_C5R3 POS_LH_C4R3 POS_LH_C3R3 POS_LH_C2R3 POS_LH_C1R3 POS_LH_C6R4 POS_LH_C5R4 POS_LH_C4R4 POS_LH_C3R4 POS_LH_C2R4 POS_LH_C1R4 POS_LH_C4R5 POS_LH_C3R5 POS_LH_C2R5 POS_LH_C1R1 POS_RH_T3 POS_RH_T2 POS_RH_T1>;
@@ -407,7 +409,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <190>;
             bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
+            flavor = "hold-preferred";
             quick-tap-ms = <175>;
             require-prior-idle-ms = <125>;
             hold-trigger-key-positions = <POS_LH_T3 POS_LH_T2 POS_LH_T1 POS_LH_C6R1 POS_LH_C5R1 POS_LH_C4R1 POS_LH_C3R1 POS_LH_C2R1 POS_LH_C6R2 POS_LH_C5R2 POS_LH_C4R2 POS_LH_C3R2 POS_LH_C2R2 POS_LH_C1R2 POS_LH_C6R3 POS_LH_C5R3 POS_LH_C4R3 POS_LH_C3R3 POS_LH_C2R3 POS_LH_C1R3 POS_LH_C6R4 POS_LH_C5R4 POS_LH_C4R4 POS_LH_C3R4 POS_LH_C2R4 POS_LH_C1R4 POS_LH_C4R5 POS_LH_C3R5 POS_LH_C2R5 POS_LH_C1R1 POS_RH_T3 POS_RH_T2 POS_RH_T1>;
@@ -420,7 +422,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
+            flavor = "hold-preferred";
             quick-tap-ms = <175>;
             require-prior-idle-ms = <125>;
             hold-trigger-key-positions = <POS_LH_T3 POS_LH_T2 POS_LH_T1 POS_LH_C6R1 POS_LH_C5R1 POS_LH_C4R1 POS_LH_C3R1 POS_LH_C2R1 POS_LH_C6R2 POS_LH_C5R2 POS_LH_C4R2 POS_LH_C3R2 POS_LH_C2R2 POS_LH_C1R2 POS_LH_C6R3 POS_LH_C5R3 POS_LH_C4R3 POS_LH_C3R3 POS_LH_C2R3 POS_LH_C1R3 POS_LH_C6R4 POS_LH_C5R4 POS_LH_C4R4 POS_LH_C3R4 POS_LH_C2R4 POS_LH_C1R4 POS_LH_C4R5 POS_LH_C3R5 POS_LH_C2R5 POS_LH_C1R1 POS_RH_T3 POS_RH_T2 POS_RH_T1>;
@@ -893,34 +895,34 @@
 /* ========================================================================== */
 
 &cirque_rh_listener {
-    input-processors = <&zip_xy_scaler 3 1>, <&zip_temp_layer 7 1000>;
+    input-processors = <&zip_xy_scaler 3 1>, <&zip_temp_layer 7 250>;
     layer_8 {
         layers = <LAYER_MouseSlow>;
-        input-processors = <&zip_xy_scaler 1 1>, <&zip_temp_layer 7 1000>;
+        input-processors = <&zip_xy_scaler 1 1>, <&zip_temp_layer 7 250>;
     };
     layer_10 {
         layers = <LAYER_MouseWarp>;
-        input-processors = <&zip_xy_scaler 6 1>, <&zip_temp_layer 7 1000>;
+        input-processors = <&zip_xy_scaler 6 1>, <&zip_temp_layer 7 250>;
     };
     layer_9 {
         layers = <LAYER_MouseFast>;
-        input-processors = <&zip_xy_scaler 4 1>, <&zip_temp_layer 7 1000>;
+        input-processors = <&zip_xy_scaler 4 1>, <&zip_temp_layer 7 250>;
     };
 };
 
 &cirque_lh_listener {
-    input-processors = <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 1000>, <&zip_scroll_scaler 1 16>;
+    input-processors = <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 250>, <&zip_scroll_scaler 1 16>;
     layer_8 {
         layers = <LAYER_MouseSlow>;
-        input-processors = <&zip_xy_scaler 5 14>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 1000>, <&zip_scroll_scaler 1 16>;
+        input-processors = <&zip_xy_scaler 5 14>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 250>, <&zip_scroll_scaler 1 16>;
     };
     layer_10 {
         layers = <LAYER_MouseWarp>;
-        input-processors = <&zip_xy_scaler 13 3>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 1000>, <&zip_scroll_scaler 1 16>;
+        input-processors = <&zip_xy_scaler 13 3>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 250>, <&zip_scroll_scaler 1 16>;
     };
     layer_9 {
         layers = <LAYER_MouseFast>;
-        input-processors = <&zip_xy_scaler 3 2>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 1000>, <&zip_scroll_scaler 1 16>;
+        input-processors = <&zip_xy_scaler 3 2>, <&zip_xy_to_scroll_mapper>, <&zip_temp_layer 7 250>, <&zip_scroll_scaler 1 16>;
     };
 };
 
@@ -1134,7 +1136,7 @@
             bindings = <
 /* ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /* │          ---               │ │          ---               │ │         SCROLL UP          │ │            ---             │ │        RIGHT CLICK         │ │          ---               │                                                                                     │          ---               │ │           ---              │ │            ---             │ │            ---             │ │            ---             │ │          ---               │ */
-              &none                          &none                       &msc SCRL_UP                       &none                      &mkp RCLK                         &none                                                                                                              &none                          &none                          &none                          &none                           &none                        &none
+              &none                          &none                       &msc SCRL_UP                       &none                      &mkp RCLK                         &none                                                                                                              &none                          &none                           &none                           &none                         &none                         &none
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
 /* │          ---               │ │          ---               │ │      SCROLL DOWN           │ │       MOUSE UP             │ │        LEFT CLICK          │ │          ---               │                                                                                     │          ---               │ │       SK RSHIFT            │ │         SK RCTRL           │ │           SK RALT          │ │           SK RGUI          │ │          ---               │ */
               &none                          &none                      &msc SCRL_DOWN                  &mmv MOVE_UP                    &mkp LCLK                        &none                                                                                                              &none                        &sk RSHFT                       &sk RCTRL                        &sk RALT                      &sk RGUI                       &none
@@ -1143,14 +1145,14 @@
               &none                       &msc SCRL_UP                   &mmv MOVE_LEFT                 &mmv MOVE_DOWN                &mmv MOVE_RIGHT                 &msc SCRL_UP                                                                                                       &msc SCRL_UP                 &mo LAYER_MouseFast            &mo LAYER_MouseWarp            &mo LAYER_MouseSlow                &mkp LCLK                       &mkp MB4
 /* ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤                                                                                     ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ */
 /* │          ---               │ │      SCROLL DOWN           │ │       MO MOUSESLOW         │ │         MO MOUSEWARP       │ │      MO MOUSEFAST          │ │            ---             │                                                                                     │        SCROLL DOWN         │ │        SCROLL LEFT         │ │       SCROLL RIGHT         │ │             ---            │ │        RIGHT CLICK         │ │            MB5             │ */
-              &none                      &msc SCRL_DOWN               &mo LAYER_MouseSlow            &mo LAYER_MouseWarp            &mo LAYER_MouseFast                 &none                                                                                                          &msc SCRL_DOWN                 &msc SCRL_LEFT                  &msc SCRL_RIGHT                      &none                       &mkp RCLK                       &mkp MB5
+              &none                      &msc SCRL_DOWN               &mo LAYER_MouseSlow            &mo LAYER_MouseWarp            &mo LAYER_MouseFast                 &none                                                                                                            &msc SCRL_DOWN                 &msc SCRL_LEFT                &msc SCRL_RIGHT                      &none                       &mkp RCLK                       &mkp MB5
 /* ╰────────────────────────────╯ ╰────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┼──────────────────────────────╯ */
 /*                                │          TRANS             │ │            TRANS           │ │            TRANS           │                                                                                                                                                                                  │            TRANS           │ │            TRANS           │ │            TRANS           │ */
                                             &trans                           &trans                         &trans                                                                                                                                                                                                           &trans                         &trans                         &trans
 /*                                ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                                                                                                                  ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
 /*                                                                                              ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
-/*                                                                                              │          TRANS             │ │            TRANS           │ │            TRANS           │                                                                                     │         LEFT MOUSE         │ │          TRANS             │ │          TRANS             │ */
-                                                                                                           &trans                          &trans                         &trans                                                                                                            &mkp LCLK                       &trans                         &trans
+/*                                                                                              │          TRANS             │ │        LEFT MOUSE          │ │          TRANS             │                                                                                     │         LEFT MOUSE         │ │        RIGHT MOUSE         │ │          TRANS             │ */
+                                                                                                           &trans                       &mkp LCLK                       &mkp RCLK                                                                                                            &mkp LCLK                     &mkp RCLK                         &trans
 /*                                                                                              ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
             >;
         };
@@ -1256,12 +1258,12 @@
 /* │           ---              │ │           ---              │ │          BT 0              │ │          BT 1              │ │          BT 2              │ │          BT 3              │                                                                                     │           ---              │ │           ---              │ │           ---              │ │           ---              │ │           ---              │ │          ---               │ */
               &none                         &none                          &bt_0                          &bt_1                          &bt_2                          &bt_3                                                                                                               &none                          &none                          &none                          &none                          &none                          &none
 /* ╰────────────────────────────╯ ╰────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┤ ├────────────────────────────┼──────────────────────────────╯ */
-/*                                │         OUT USB            │ │           ---              │ │           ---              │                                                                                                                                                                                  │           ---              │ │           ---              │ │           ---              │ */
+/*                                │         OUT USB            │ │           ---              │ │           ---              │                                                                                                                                                                                  │         LEFT RECT          │ │         TOP RECT           │ │         RIGHT RECT         │ */
                                          &out OUT_USB                       &none                      &to LAYER_Typing                                                                                                                                                                                                    &none                          &none                          &none
 /*                                ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                                                                                                                  ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
 /*                                                                                              ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮                                                                                     ╭────────────────────────────╮ ╭────────────────────────────╮ ╭────────────────────────────╮ */
 /*                                                                                              │           ---              │ │           ---              │ │           ---              │                                                                                     │           ---              │ │           ---              │ │           ---              │ */
-                                                                                                        &hyper_key                          &none                     &to LAYER_Autoshift                                                                                                     &none                          &none                          &none
+                                                                                                        &hyper_key                        &none                     &to LAYER_Autoshift                                                                                                     &none                          &none                          &none
 /*                                                                                              ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯                                                                                     ╰────────────────────────────╯ ╰────────────────────────────╯ ╰────────────────────────────╯ */
             >;
         };
