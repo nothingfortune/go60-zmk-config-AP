@@ -227,3 +227,5 @@ A comprehensive Glove80/MoErgo keymap featuring Miryoku-style layers and home ro
 **Key Philosophy:**
 *"Touch typing is like learning to ride a bike—don't look down; keep your eyes forward, trust your movement, and go with the rhythm."* — Moosy
 
+** Key Template Layout **
+- /WIP/templateLayout.keymap
