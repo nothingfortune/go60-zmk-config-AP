@@ -419,6 +419,13 @@
 / {
     macros {
 
+        /* Hyper key macro - ⌘⌃⌥⇧ for Raycast/Alfred */
+        hyper_key: hyper_key_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&sk LGUI>, <&sk LALT>, <&sk LCTRL>, <&sk LSHFT>;
+        };
+
 /* ------------------------------------------------------------------ */
 /*                           Tabbing                                  */
 /*                                                                    */
