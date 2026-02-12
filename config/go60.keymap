@@ -1012,16 +1012,6 @@
             bindings = <&kp TAB>, <&hyper_key>;
         };
 
-                // space_layer_access - TailorKey
-        space_v3_TKZ: space_v3_TKZ {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            bindings = <&mo>, <&kp>;
-            flavor = "balanced";
-            quick-tap-ms = <150>;
-        };
-
         // thumb_layer_access - TailorKey
         thumb_v2_TKZ: thumb_v2_TKZ {
             compatible = "zmk,behavior-hold-tap";
