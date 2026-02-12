@@ -611,12 +611,12 @@
             wait-ms = <0>;
             bindings = <&macro_press>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp F>
                 , <&mo LAYER_LeftIndex>
                 , <&macro_pause_for_release>
                 , <&macro_release>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp F>
                 , <&mo LAYER_LeftIndex>;
         };
 
@@ -640,7 +640,7 @@
                 , <&kp F>
                 , <&macro_tap>
                 , <&macro_param_1to1>
-                , <&kp A>;
+                , <&kp F>;
         };
 
         // HRM_left_middy_hold -> swich layer - TailorKey
@@ -652,12 +652,12 @@
             wait-ms = <0>;
             bindings = <&macro_press>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp D>
                 , <&mo LAYER_LeftMiddy>
                 , <&macro_pause_for_release>
                 , <&macro_release>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp D>
                 , <&mo LAYER_LeftMiddy>;
         };
 
@@ -681,7 +681,7 @@
                 , <&kp D>
                 , <&macro_tap>
                 , <&macro_param_1to1>
-                , <&kp A>;
+                , <&kp D>;
         };
 
         // HRM_left_pinky_hold -> swich layer - TailorKey
@@ -734,12 +734,12 @@
             wait-ms = <0>;
             bindings = <&macro_press>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp S>
                 , <&mo LAYER_LeftRingy>
                 , <&macro_pause_for_release>
                 , <&macro_release>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp S>
                 , <&mo LAYER_LeftRingy>;
         };
 
@@ -763,7 +763,7 @@
                 , <&kp S>
                 , <&macro_tap>
                 , <&macro_param_1to1>
-                , <&kp A>;
+                , <&kp S>;
         };
 
         // HRM_right_index_hold -> swich layer - TailorKey
@@ -775,12 +775,12 @@
             wait-ms = <0>;
             bindings = <&macro_press>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp J>
                 , <&mo LAYER_RightIndex>
                 , <&macro_pause_for_release>
                 , <&macro_release>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp J>
                 , <&mo LAYER_RightIndex>;
         };
 
@@ -804,7 +804,7 @@
                 , <&kp J>
                 , <&macro_tap>
                 , <&macro_param_1to1>
-                , <&kp A>;
+                , <&kp J>;
         };
 
         // HRM_right_middy_hold -> swich layer - TailorKey
@@ -816,12 +816,12 @@
             wait-ms = <0>;
             bindings = <&macro_press>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp K>
                 , <&mo LAYER_RightMiddy>
                 , <&macro_pause_for_release>
                 , <&macro_release>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp K>
                 , <&mo LAYER_RightMiddy>;
         };
 
@@ -845,7 +845,7 @@
                 , <&kp K>
                 , <&macro_tap>
                 , <&macro_param_1to1>
-                , <&kp A>;
+                , <&kp K>;
         };
 
         // HRM_right_pinky_hold -> swich layer - TailorKey
@@ -857,12 +857,12 @@
             wait-ms = <0>;
             bindings = <&macro_press>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp SEMI>
                 , <&mo LAYER_RightPinky>
                 , <&macro_pause_for_release>
                 , <&macro_release>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp SEMI>
                 , <&mo LAYER_RightPinky>;
         };
 
@@ -886,7 +886,7 @@
                 , <&kp SEMI>
                 , <&macro_tap>
                 , <&macro_param_1to1>
-                , <&kp A>;
+                , <&kp SEMI>;
         };
 
         // HRM_right_ring_hold -> swich layer - TailorKey
@@ -898,12 +898,12 @@
             wait-ms = <0>;
             bindings = <&macro_press>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp L>
                 , <&mo LAYER_RightRingy>
                 , <&macro_pause_for_release>
                 , <&macro_release>
                 , <&macro_param_1to1>
-                , <&kp A>
+                , <&kp L>
                 , <&mo LAYER_RightRingy>;
         };
 
@@ -927,7 +927,7 @@
                 , <&kp L>
                 , <&macro_tap>
                 , <&macro_param_1to1>
-                , <&kp A>;
+                , <&kp L>;
         };
 
         // mod_tab_switcher_chord -  TailorKey
