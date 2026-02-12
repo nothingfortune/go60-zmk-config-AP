@@ -1,0 +1,3 @@
+[submodule "libs/zmk-custom-functions-lib"]
+	path = libs/zmk-custom-functions-lib
+	url = https://github.com/nothingfortune/zmk-custom-functions-lib.git
