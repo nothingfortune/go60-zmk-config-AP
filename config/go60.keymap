@@ -989,7 +989,18 @@
 /* Automatically generated behavior definitions */
 / {
     behaviors {
-        
+
+        // thumb_LAYER_access - TailorKey
+        lt_v2_TKZ: lt_v2_TKZ {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
+            flavor = "balanced";
+            quick-tap-ms = <300>;
+        };
+
+
         /* Caps Word: Capitalizes alphanumeric keys until a stop key is pressed */
         cw: caps_word {
             compatible = "zmk,behavior-caps-word";
