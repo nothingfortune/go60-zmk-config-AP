@@ -6,3 +6,4 @@ manifest:
     - name: zmk-custom-functions-lib
       url: https://github.com/nothingfortune/zmk-custom-functions-lib
       revision: main
+      path: libs/zmk-custom-functions-lib
